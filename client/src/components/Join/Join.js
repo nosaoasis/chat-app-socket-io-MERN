@@ -3,13 +3,14 @@ import {Link, useNavigate} from 'react-router-dom'
 import './Join.css'
 
 const Join = () => {
-  const [name, setName] = useState()
-  const [room, setRoom] = useState()
+  const [name, setName] = useState("")
+  const [room, setRoom] = useState("")
 
   const navigate = useNavigate()
 
   const handleSignIn = () => {
-    navigate('/chat', {state: {name, room}})
+    // navigate('/chat', {state: {name, room}})
+    navigate(`/chat?name=${name}&room=${room}`, {state: {name, room}})
   }
 
   return (
@@ -35,18 +36,21 @@ const Join = () => {
               onChange={e => setRoom(e.target.value)}
             />
           </div>
-          <Link 
+          {/* <Link 
             to={`/chat?name=${name}&room=${room}`} 
-            onClick={e => (!name || !room) ? e.preventDefault() : null}>
+            disabled={!name || !room}
+            onClick={handleSignIn}
+            onClick={e => (!name || !room) ? e.preventDefault() : null}
+          > */}
             <button 
               className="button mt-20" 
               type="submit" 
-              // disabled={!name || !room}
-              // onClick={handleSignIn}
+              disabled={!name || !room}
+              onClick={handleSignIn}
               >
                 Sign In
               </button>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     </>
